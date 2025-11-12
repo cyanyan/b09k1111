@@ -46,16 +46,6 @@
     width: 100%;
     justify-content: center;
     box-sizing: border-box;
-    /* 防止布局抖动 */
-    min-height: 0;
-    will-change: transform, opacity;
-    /* 初始隐藏，等待所有内容加载完成后再显示 */
-    opacity: 0;
-    visibility: hidden;
-  }
-  
-  .image-grid.ready {
-    visibility: visible;
   }
   
   .grid-item {
@@ -150,114 +140,50 @@
 </style>
 </head>
 <body>
-  <div class="container">
-    <!-- 图片网格 -->
+  <div class="container content-slide-in">
     <div class="image-grid" id="imageGrid"></div>
   </div>
 
   <script>
     const imageGrid = document.getElementById('imageGrid');
-    
-    // 图片对应的文字和时间数据（根据实际图片数量添加）
-    const imageData = [
-      { title: "Event Title 1", date: "18.10-18.11. 2025" },
-      { title: "Event Title 2", date: "18.10-18.11. 2025" },
-      { title: "Event Title 3", date: "18.10-18.11. 2025" },
-      { title: "Event Title 4", date: "18.10-18.11. 2025" }
+
+    const eventsData = [
+      { title: "Event Title 1", date: "18.10-18.11. 2025", image: "assets/events/1.jpg" },
+      { title: "Event Title 2", date: "18.10-18.11. 2025", image: "assets/events/2.jpg" },
+      { title: "Event Title 3", date: "18.10-18.11. 2025", image: "assets/events/3.jpg" },
+      { title: "Event Title 4", date: "18.10-18.11. 2025", image: "assets/events/4.jpg" }
     ];
-    
-    // 检查图片是否存在，只显示存在的图片
-    function checkImageExists(imagePath) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = imagePath;
-      });
-    }
-    
-    // 渲染图片列表，只显示存在的图片
-    async function renderImages() {
+
+    function renderEvents() {
       imageGrid.innerHTML = '';
-      imageGrid.classList.remove('ready', 'content-slide-in');
-      let imageNumber = 1;
-      let hasImages = false;
-      const imagePromises = [];
-      const gridItems = [];
-      
-      // 先收集所有需要加载的图片
-      while (true) {
-        const imagePath = `assets/events/${imageNumber}.jpg`;
-        const exists = await checkImageExists(imagePath);
-        
-        if (!exists) {
-          break; // 图片不存在，停止循环
-        }
-        
-        hasImages = true;
+
+      eventsData.forEach(({ title, date, image }, index) => {
         const gridItem = document.createElement('div');
         gridItem.className = 'grid-item';
-        
+
         const imageLink = document.createElement('a');
         imageLink.href = '#';
         imageLink.className = 'image-link';
-        
+
         const img = document.createElement('img');
-        img.src = imagePath;
-        img.alt = `Event ${imageNumber}`;
-        
-        // 等待图片加载完成
-        const imgLoadPromise = new Promise((resolve) => {
-          img.onload = resolve;
-          img.onerror = resolve; // 即使加载失败也继续
-        });
-        imagePromises.push(imgLoadPromise);
-        
-        // 获取对应的文字和时间（如果数据存在则使用，否则使用默认值）
-        const data = imageData[imageNumber - 1] || { title: "Event", date: "18.10-18.11. 2025" };
-        
+        img.src = image;
+        img.alt = title || `Event ${index + 1}`;
+
         const caption = document.createElement('div');
         caption.className = 'caption';
         caption.innerHTML = `
-          <span class="title">${data.title}</span>
-          <span class="date">${data.date}</span>
+          <span class="title">${title}</span>
+          <span class="date">${date}</span>
         `;
-        
+
         imageLink.appendChild(img);
         gridItem.appendChild(imageLink);
         gridItem.appendChild(caption);
-        gridItems.push(gridItem);
-        imageNumber++;
-      }
-      
-      // 如果没有图片，显示提示（可选）
-      if (!hasImages) {
-        imageGrid.innerHTML = '<p style="text-align: center; color: #999;">暂无图片</p>';
-        imageGrid.classList.add('ready', 'content-slide-in');
-        return;
-      }
-      
-      // 先将所有元素添加到 DOM（但不可见）
-      gridItems.forEach(item => {
-        imageGrid.appendChild(item);
-      });
-      
-      // 等待所有图片加载完成
-      await Promise.all(imagePromises);
-      
-      // 使用 requestAnimationFrame 确保布局计算完成后再统一显示
-      requestAnimationFrame(() => {
-        // 先设置为可见
-        imageGrid.classList.add('ready');
-        // 然后触发动画
-        requestAnimationFrame(() => {
-          imageGrid.classList.add('content-slide-in');
-        });
+        imageGrid.appendChild(gridItem);
       });
     }
-    
-    // 初始化：加载图片
-    renderImages();
+
+    renderEvents();
   </script>
 </body>
 </html>
