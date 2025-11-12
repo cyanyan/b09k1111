@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book</title>
+<link rel="icon" href="assets/b.ico" type="image/x-icon">
+<link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<style>
+  html, body { overflow-y: auto; scrollbar-width: none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
+  body { background:#ffffff; color:#000; }
+  .book-list { 
+    width: 560px; 
+    max-width: 90vw; 
+    margin: 18px auto 60px; 
+    font-size: 13.3px; 
+  }
+  .book-list ul { list-style:none; padding:0; margin:0; }
+  .book-list li { 
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding:6px 0; 
+    border-bottom: var(--line) solid var(--color); 
+  }
+  .book-list li:last-child { border-bottom: var(--line) solid var(--color); }
+  .book-title,
+  .book-author {
+    display: block;
+    font-family: var(--font);
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .book-title {
+    flex: 1 1 55%;
+    min-width: 0;
+  }
+  .book-author {
+    flex: 0 1 40%;
+    text-align: right;
+    min-width: 0;
+  }
+  @media (max-width: 768px) {
+     body {
+       padding: 10px 0;
+     }
+     .book-list { 
+       width: 560px; 
+       max-width: 70vw; 
+       margin: 10px auto 20px; 
+       font-size: 11px; 
+     }
+     .book-list li {
+       padding: 2px 0;
+       gap: 12px;
+       flex-wrap: nowrap;
+     }
+     .book-author {
+       flex: 0 1 45%;
+       text-align: right;
+       opacity: 1;
+     }
+   }
+</style>
+<!-- 该页面在 iframe 中显示书目列表，内容来自 assets/booklist.txt -->
+</head>
+<body>
+  <div class="book-list content-slide-in">
+    <ul id="bookItems"></ul>
+  </div>
+
+  <script>
+    fetch('assets/booklist.txt')
+      .then(r => r.text())
+      .then(txt => {
+        const lines = txt.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+        const ul = document.getElementById('bookItems');
+        lines.forEach(line => {
+          const { title, author } = parseBookLine(line);
+          const li = document.createElement('li');
+          const titleSpan = document.createElement('span');
+          titleSpan.className = 'book-title';
+          titleSpan.textContent = title;
+
+          const authorSpan = document.createElement('span');
+          authorSpan.className = 'book-author';
+          authorSpan.textContent = author;
+
+          li.appendChild(titleSpan);
+          li.appendChild(authorSpan);
+          ul.appendChild(li);
+        });
+      })
+      .catch(() => {
+        const ul = document.getElementById('bookItems');
+        const li = document.createElement('li');
+        li.textContent = '无法加载书目列表（assets/booklist.txt）。';
+        ul.appendChild(li);
+      });
+
+    function parseBookLine(line) {
+      const commentIndex = line.indexOf('//');
+      if (commentIndex !== -1) {
+        const title = line.slice(0, commentIndex).trim();
+        const author = line.slice(commentIndex + 2).trim();
+        return { title, author };
+      }
+      return { title: line, author: '' };
+    }
+  </script>
+</body>
+</html>

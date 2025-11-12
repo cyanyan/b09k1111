@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>B09K</title>
+  <link rel="icon" href="assets/b2.svg" type="image/x-icon" />
+  <link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/pages/home.css" />
+</head>
+<body>
+
+
+  <div id="nav-placeholder"></div>
+
+
+  <div class="tab-labels">
+    <div class="label" data-id="book" style="--x: 85%; --y: 2%;">
+      <span class="short">B</span><span class="full">Book</span>
+    </div>
+    <div class="label" data-id="lunar_practices" style="--x: 65%; --y: 8%;">
+      <span class="short">L</span><span class="full">Lunar Practice</span>
+    </div>
+    <div class="label" data-id="exhibitions" style="--x: 45%; --y: 14%;">
+      <span class="short">E</span><span class="full">Exhibitions</span>
+    </div>
+    <div class="label" data-id="events" style="--x: 25%; --y: 20%;">
+      <span class="short">E</span><span class="full">Events</span>
+    </div>
+    <div class="label" data-id="about" style="--x: 5%; --y: 26%;">
+      <span class="short">A</span><span class="full">About</span>
+    </div>
+  </div>
+
+
+  <main class="home-main">
+    <img src="assets/icons/B09k.svg" alt="Logo" class="logo" />
+    <div class="image-container" id="imageContainer"></div>
+  </main>
+
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/load-nav.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script>
+
+    fetch('partials/footer.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+</body>
+</html>

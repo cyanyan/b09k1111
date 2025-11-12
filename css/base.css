@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'AdelpheTrouble';
+  src: url('../assets/Adelphe-Trouble-GerminalRegular.otf') format('opentype');
+  font-display: swap;
+}
+
+:root {
+  --line: 1px;
+  --color: #000;
+  --gap: 3px; 
+  --tab-w: 12px;
+  --font: 'AdelpheTrouble';
+  --dur: 0.3s;
+  --ease: cubic-bezier(0.43, 1, 0.83, 1);
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #000000;
+  font-family: var(--font);
+  font-size: 13.3px; 
+  box-sizing: border-box;
+  overflow: hidden;
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    font-size: 11px;
+  }
+}

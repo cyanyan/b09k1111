@@ -1,0 +1,280 @@
+/* ===== 右侧竖线抽屉结构 ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: var(--gap);
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  z-index: 1000;
+}
+
+/* 保留原竖线可见 */
+.sidebar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(var(--tab-w) * 5);
+  height: 100%;
+  /* 固定绘制右侧5条线，不随卡片展开消失 */
+  background-image: repeating-linear-gradient(
+    to left,
+    var(--color) 0,
+    var(--color) var(--line),
+    transparent var(--line),
+    transparent var(--tab-w)
+  );
+  z-index: 1500;
+  pointer-events: none;
+}
+
+/* 抽屉卡片栏 */
+.tab {
+  position: relative;
+  width: var(--tab-w);
+  height: 100%;
+  /* 右侧线条统一由 .sidebar::after 绘制，这里取消 */
+  border-right: none;
+  /* background: #fff; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: width var(--dur) var(--ease);
+}
+
+.tab span {
+  font-size: 10px;
+  transition: opacity 0.4s ease, transform 0s ease;
+}
+.tab .short { opacity: 1; }
+.tab .full  { opacity: 0; margin-left: 8px; }
+
+.tab.active {
+  position: fixed;          /* 脱离 flex 布局 */
+  top: 0;
+  left: 50%;                /* 画布正中 */
+  transform: translateX(-50%);
+  width: calc(100vw - (var(--gap) * 2));
+  height: 100vh;
+  padding: 120px var(--gap) var(--gap);
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 3000;
+  justify-content: flex-start;
+  animation: slideFromRightToCenter 0.3s var(--ease);
+}
+
+@keyframes slideFromRightToCenter {
+  from {
+    opacity: 0;
+    left: calc(100% - var(--gap));
+    transform: translateX(-100%);
+    width: calc(100vw - (var(--tab-w) * 5) - var(--gap));
+  }
+  to {
+    opacity: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - (var(--gap) * 2));
+  }
+}
+
+.tab.active iframe {
+  display: block;
+  height: calc(100vh - 120px - var(--gap));
+  animation: fadeInFromRight 0.8s var(--ease);
+}
+
+@keyframes fadeInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tab.active::-webkit-scrollbar { width: 0; height: 0; }
+
+/* ===== 手机端自适应：与桌面视觉一致的规则 ===== */
+@media (max-width: 768px) {
+  :root {
+    --tab-w-mobile: 8px; /* 手机端线条间距更窄 */
+    --line-mobile: 1px; /* 手机端线条与桌面端一致 */
+    --sidebar-width-mobile: 40px; /* 手机端右侧黑边总宽度，可单独调整 */
+  }
+  
+  .tab.active {
+    width: calc(100vw - (var(--gap) * 2));
+    padding: 90px var(--gap) var(--gap);
+    height: 100vh;
+  }
+  
+  /* 手机端右侧线条：间距更窄，线条更细 */
+  .sidebar::after {
+    width: var(--sidebar-width-mobile); /* 使用单独的变量控制右侧黑边宽度 */
+    background-image: repeating-linear-gradient(
+      to left,
+      var(--color) 0,
+      var(--color) var(--line-mobile),
+      transparent var(--line-mobile),
+      transparent var(--tab-w-mobile)
+    );
+  }
+  
+  .tab {
+    width: var(--tab-w-mobile);
+  }
+}
+
+/* 展开卡片内容容器（iframe） */
+.tab iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+  display: block; /* 确保从左边开始显示 */
+  margin: 0;
+}
+
+/* ===== 全局内容滑入动画（用于 iframe 内的内容） ===== */
+@keyframes contentSlideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 全局内容容器动画类 */
+.content-slide-in {
+  opacity: 0;
+  animation: contentSlideInFromRight 0.8s var(--ease) forwards;
+}
+
+/* ===== 新增书签便利签标签层 ===== */
+.tab-labels {
+  position: fixed;
+  top: 0;
+  right: var(--gap);
+  height: 100%;
+  width: calc(var(--tab-w) * 5);
+  pointer-events: none;
+  z-index: 2000;
+}
+
+/* ===== 基础叠放顺序：从上到下 ===== */
+.tab[data-id="book"] { z-index: 10; }
+.tab[data-id="lunar_practices"] { z-index: 40; }
+.tab[data-id="exhibitions"] { z-index: 30; }
+.tab[data-id="events"] { z-index: 20; }
+.tab[data-id="about"] { z-index: 50; }
+
+/* 单个标签（便利贴样式） */
+.tab-labels .label {
+  position: absolute;
+  top: var(--y);
+  right: var(--x);
+  height: 14px;
+  background: #f5f5f5; /* 浅灰色背景 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* 改为居中，让首字符在底部线条中心 */
+  padding: 2px 4px; /* 左右各1px padding，让框宽度比字符多2px */
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.2s ease-out; /* 快速平滑的过渡，避免抖动 */
+  overflow: visible; /* 允许底部线条可见 */
+}
+
+/* 使用伪元素绘制底部线条，让字符在其中心 */
+.tab-labels .label::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* 线条宽度与背景框一致 */
+  height: var(--line);
+  background: var(--color);
+  pointer-events: none; /* 不影响点击 */
+  transition: width 0.8s var(--ease); /* 与文字框展开速度一致 */
+}
+
+.tab-labels .label span {
+  font-family: var(--font);
+  font-size: 11px;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  white-space: nowrap;
+  line-height: 14px; /* 行高等于标签高度，确保垂直居中 */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 首字母默认可见 */
+.tab-labels .label .short {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tab-labels .label .full {
+  position: relative; /* 与首字母同行展开 */
+  margin-left: 0; /* 移除左边距，确保居中 */
+  opacity: 0;
+  max-width: 0;        /* 初始不占空间 */
+  overflow: hidden;     /* 裁剪文字以实现从首字母向右展开 */
+  transition: max-width 0.8s var(--ease), opacity 0.8s ease; /* 文字框展开速度，与字符一致 */
+  will-change: max-width;
+  text-align: center; /* 字符在文字框中居中 */
+  pointer-events: none; /* 不拦截鼠标事件，避免抖动 */
+}
+
+/* 逐字入场：默认每个字符微偏移并透明 */
+.tab-labels .label .full .char {
+  display: inline-block;
+  transform: translateX(2px);
+  opacity: 0;
+  transition: transform 0.3s var(--ease), opacity 0.2s ease; /* 快速显示，更像打字机 */
+  pointer-events: none; /* 字符不拦截鼠标事件 */
+}
+
+.tab-labels .label.active {
+  transform: translateX(-2px);
+}
+
+.tab-labels .label.active .full {
+  opacity: 1;
+  max-width: 200px; /* 增大宽度，确保完整字符能显示 */
+}
+
+/* 打字机效果：按延迟逐字显现 */
+.tab-labels .label.active .full .char {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* 激活时仅显示全称，不重复首字母 */
+.tab-labels .label.active .short {
+  opacity: 0;
+  transform: translateX(-5px);
+}
+
+/* 手机端也显示标签层，并稍微缩小尺寸以适配 */
+@media (max-width: 768px) {
+  .tab-labels { 
+    display: block; 
+    right: var(--gap);
+    width: var(--sidebar-width-mobile); /* 使用右侧黑边宽度，确保对齐 */
+  }
+  .tab-labels .label { height: 18px; padding: 0 1px; }
+  .tab-labels .label span { font-size: 10px; line-height: 18px; }
+  .tab-labels .label .full { max-width: 0; }
+}

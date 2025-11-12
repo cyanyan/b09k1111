@@ -1,0 +1,65 @@
+.home-main {
+  position: relative;
+  width: calc(100% - var(--gap));
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logo {
+  position: absolute;
+  top: 18px;
+  width: 80px;
+  z-index: 5000; /* 始终位于页面最上层 */
+  cursor: pointer;
+  touch-action: manipulation; /* 防止双击缩放 */
+  -webkit-touch-callout: none; /* 禁用长按菜单 */
+}
+
+.image-container {
+  position: relative;
+  /* width 由 JavaScript 动态设置，确保容器宽度 = 图片宽度 + 40px */
+  max-width: 60vw; /* 桌面端最大宽度限制 */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  touch-action: manipulation; /* 防止双击缩放 */
+}
+
+/* 展开任意栏目时，首页中间图片隐藏，仅 Logo 常驻 */
+body.tab-open .image-container {
+  display: none;
+}
+
+.image-container img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  touch-action: manipulation; /* 防止双击缩放 */
+  -webkit-touch-callout: none; /* 禁用长按菜单 */
+}
+
+.image-container img.visible {
+  opacity: 1;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    top: 18px;
+    width: 70px;
+  }
+
+  .image-container {
+    /* width 由 JavaScript 动态设置，确保容器宽度 = 图片宽度 + 40px */
+    max-width: 60vw; /* 手机端最大宽度限制 */
+  }
+}
