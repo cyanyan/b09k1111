@@ -4,12 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>B09K</title>
+
+
   <link rel="icon" href="assets/b2.svg" type="image/x-icon" />
+
+
   <link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
+
+
+  <link rel="prefetch" href="book.html">
+  <link rel="prefetch" href="moon.html">
+  <link rel="prefetch" href="exhibitions.html">
+  <link rel="prefetch" href="events.html">
+  <link rel="prefetch" href="about.html">
+
+
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/pages/home.css" />
 </head>
+
 <body>
 
 
@@ -43,16 +57,19 @@
 
   <div id="footer-placeholder"></div>
 
+
   <script src="js/load-nav.js"></script>
   <script src="js/main.js"></script>
   <script src="js/pages/home.js"></script>
-  <script>
 
+
+  <script>
     fetch('partials/footer.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('footer-placeholder').innerHTML = data;
       });
   </script>
+
 </body>
 </html>

@@ -9,7 +9,18 @@
   z-index: 1000;
 }
 
-/* 保留原竖线可见 */
+.sidebar::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 30;
+  width: calc(var(--tab-w) * 3);
+  height: 100vh;
+  background: #fff;
+  z-index: 1499; 
+  pointer-events: none;
+}
+
 .sidebar::after {
   content: "";
   position: absolute;
@@ -17,7 +28,6 @@
   right: 0;
   width: calc(var(--tab-w) * 5);
   height: 100%;
-  /* 固定绘制右侧5条线，不随卡片展开消失 */
   background-image: repeating-linear-gradient(
     to left,
     var(--color) 0,
@@ -28,6 +38,7 @@
   z-index: 1500;
   pointer-events: none;
 }
+
 
 /* 抽屉卡片栏 */
 .tab {

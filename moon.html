@@ -7,6 +7,7 @@
 <link rel="icon" href="assets/b.ico" type="image/x-icon">
 <link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
 <link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
 <style>
   html, body { 
     overflow-y: auto; 
@@ -22,6 +23,7 @@
     background: #ffffff;
     color: #000;
     font-family: var(--font);
+    font-size: 13.3px;
     padding: 0;
   }
   
@@ -34,25 +36,20 @@
     align-items: center;
     gap: 20px;
     box-sizing: border-box;
-    font-size: 13.3px;
   }
   
-  /* 描述文字块 */
   .description {
     padding: 0 20px;
     width: 100%;
-    font-size: 13.3px;
-    font-family: var(--font);
     text-align: center;
     box-sizing: border-box;
-  }
-  
-  .description p {
-    margin: 0;
     line-height: 1.4;
   }
+
+  .description p {
+    margin: 0;
+  }
   
-  /* 年份导航 */
   .year-nav {
     display: flex;
     gap: 15px;
@@ -63,9 +60,7 @@
   
   .year-item {
     padding: 8px 16px;
-    font-size: 13.3px;
     font-family: var(--font);
-    text-align: center;
     cursor: pointer;
     transition: opacity 0.3s ease;
   }
@@ -79,7 +74,6 @@
     font-weight: bold;
   }
   
-  /* 图片网格 */
   .image-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, calc(50% - 5px)));
@@ -97,103 +91,99 @@
     width: 100%;
   }
   
+  .grid-item .image-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 28 / 18;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
   .grid-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: filter 0.6s ease;
-  }
-  
-  .grid-item .image-link {
     position: relative;
-    display: block;
-    width: 100%;
-    padding-top: calc(18 / 28 * 100%);
-    box-sizing: border-box;
-    overflow: hidden;
+    transition: filter 0.6s ease;
   }
   
   .grid-item .image-link:hover img {
     filter: sepia(40%) hue-rotate(10deg) saturate(120%) brightness(1.1) invert(100%);
   }
-  
-  .grid-item .image-link::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 12px;
-    height: 12px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 1;
-  }
-  
+
   .grid-item .caption {
-    font-size: 11px;
     font-family: var(--font);
     text-align: left;
+    line-height: 1.4;
   }
-  
+
+  /* 独立访问时也有滑入动画 */
+  body.standalone .container {
+    animation: contentSlideInFromRight var(--dur) var(--ease) both;
+  }
 
   @media (max-width: 768px) {
     body {
+      font-size: 11px;
       padding: 0;
     }
-    
+
     .container {
       width: min(560px, 80vw);
       margin: 10px auto 20px;
       gap: 15px;
       box-sizing: border-box;
-      font-size: 11px;
     }
-    
+
     .description {
       padding: 0;
-      font-size: 11px;
       width: 100%;
     }
-    
+
     .year-nav {
       flex-wrap: wrap;
       gap: 10px;
       width: 100%;
     }
-    
+
     .year-item {
       padding: 6px 12px;
-      font-size: 11px;
     }
-    
+
     .image-grid {
       grid-template-columns: repeat(2, minmax(0, calc(50% - 5px)));
       gap: 10px;
       width: 100%;
     }
-    
+
     .grid-item {
       width: 100%;
     }
-    
+
     .grid-item .image-link {
       width: 100%;
-      padding-top: calc(18 / 28 * 100%);
+      aspect-ratio: 28 / 18;
     }
-    
+
     .grid-item img {
       width: 100%;
       height: 100%;
-      position: absolute;
+      position: relative;
     }
   }
 </style>
 </head>
 <body>
+
+<!-- 检测是否独立打开 -->
+<script>
+if (window.top === window.self) {
+  document.body.classList.add('standalone');
+}
+</script>
+
   <div class="container content-slide-in">
     <div class="description">
       <p>Imagine this is a moon land</p>
@@ -201,20 +191,17 @@
       <p>an artistpoet or designer will come to this land</p>
       <p>Every day at sunset ( China UTC+8 ) this land will be lit up as the moon</p>
     </div>
-    
+
     <div class="year-nav">
-      <!-- <div class="year-item " data-year="2026">2026</div> -->
       <div class="year-item active" data-year="2025">2025</div>
       <div class="year-item" data-year="2024">2024</div>
       <div class="year-item" data-year="2023">2023</div>
     </div>
-    
 
     <div class="image-grid" id="imageGrid"></div>
   </div>
 
   <script>
-
     const imageData = {
       2025: [
         { name: "Maxime Le Bon", date: "18.10-18.11. 2025" },
@@ -264,26 +251,25 @@
     const imageGrid = document.getElementById('imageGrid');
     const yearItems = document.querySelectorAll('.year-item');
 
-
     function renderImages(year) {
       imageGrid.innerHTML = '';
       const images = imageData[year];
-      
+
       images.forEach((item, index) => {
         const gridItem = document.createElement('div');
         gridItem.className = 'grid-item';
-        
+
         const imageNumber = index + 1;
         const imagePath = `assets/lunar/${year}/${imageNumber}.png`;
         const pdfPath = `assets/lunar/${year}/${imageNumber}.pdf`;
-        
+
         gridItem.innerHTML = `
           <a href="${pdfPath}" class="image-link" target="_blank">
-            <img src="${imagePath}" alt="${item.name}">
+            <img src="${imagePath}" alt="${item.name}" loading="lazy">
           </a>
           <div class="caption">${item.name}, ${item.date}</div>
         `;
-        
+
         imageGrid.appendChild(gridItem);
       });
     }
@@ -293,10 +279,8 @@
     yearItems.forEach(item => {
       item.addEventListener('click', () => {
         const year = parseInt(item.dataset.year);
-        
         yearItems.forEach(y => y.classList.remove('active'));
         item.classList.add('active');
-        
         currentYear = year;
         renderImages(currentYear);
       });

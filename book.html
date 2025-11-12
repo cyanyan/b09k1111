@@ -9,25 +9,41 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
 <style>
-  html, body { overflow-y: auto; scrollbar-width: none; }
+  html, body { overflow-y: auto; scrollbar-width: none; margin:0; padding:0; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
-  body { background:#ffffff; color:#000; }
+  body { 
+    background:#ffffff; 
+    color:#000; 
+    font-family: var(--font);
+    font-size: 13.3px;
+  }
+
   .book-list { 
     width: 560px; 
     max-width: 90vw; 
     margin: 18px auto 60px; 
-    font-size: 13.3px; 
   }
-  .book-list ul { list-style:none; padding:0; margin:0; }
+
+  .book-list ul { 
+    list-style:none; 
+    padding:0; 
+    margin:0; 
+  }
+
   .book-list li { 
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end; /* ✅ 对齐最后一行 */
     gap: 24px;
     padding:6px 0; 
     border-bottom: var(--line) solid var(--color); 
+    flex-wrap: nowrap;
   }
-  .book-list li:last-child { border-bottom: var(--line) solid var(--color); }
+
+  .book-list li:last-child { 
+    border-bottom: var(--line) solid var(--color); 
+  }
+
   .book-title,
   .book-author {
     display: block;
@@ -35,40 +51,53 @@
     line-height: 1.4;
     word-break: break-word;
   }
+
   .book-title {
     flex: 1 1 55%;
     min-width: 0;
+    text-align: left;
   }
+
   .book-author {
     flex: 0 1 40%;
     text-align: right;
     min-width: 0;
   }
+
+  /* 独立访问时滑入动画 */
+  body.standalone .book-list {
+    animation: contentSlideInFromRight var(--dur) var(--ease) both;
+  }
+
   @media (max-width: 768px) {
-     body {
-       padding: 10px 0;
-     }
-     .book-list { 
-       width: 560px; 
-       max-width: 70vw; 
-       margin: 10px auto 20px; 
-       font-size: 11px; 
-     }
-     .book-list li {
-       padding: 2px 0;
-       gap: 12px;
-       flex-wrap: nowrap;
-     }
-     .book-author {
-       flex: 0 1 45%;
-       text-align: right;
-       opacity: 1;
-     }
-   }
+    body {
+      font-size: 11px;
+      padding: 0;
+    }
+    .book-list { 
+      width: min(560px, 80vw);
+      margin: 10px auto 20px; 
+    }
+    .book-list li {
+      gap: 12px;
+      padding: 3px 0;
+    }
+    .book-author {
+      flex: 0 1 45%;
+      text-align: right;
+    }
+  }
 </style>
-<!-- 该页面在 iframe 中显示书目列表，内容来自 assets/booklist.txt -->
 </head>
+
 <body>
+<!-- ✅ 检测是否独立访问 -->
+<script>
+if (window.top === window.self) {
+  document.body.classList.add('standalone');
+}
+</script>
+
   <div class="book-list content-slide-in">
     <ul id="bookItems"></ul>
   </div>
@@ -82,6 +111,7 @@
         lines.forEach(line => {
           const { title, author } = parseBookLine(line);
           const li = document.createElement('li');
+
           const titleSpan = document.createElement('span');
           titleSpan.className = 'book-title';
           titleSpan.textContent = title;
