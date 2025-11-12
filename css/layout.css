@@ -195,15 +195,15 @@
   position: absolute;
   top: var(--y);
   right: var(--x);
-  height: 14px;
+  height: 16px;
   background: #f5f5f5; /* 浅灰色背景 */
   display: inline-flex;
   align-items: center;
   justify-content: center; /* 改为居中，让首字符在底部线条中心 */
-  padding: 2px 4px; /* 左右各1px padding，让框宽度比字符多2px */
+  padding: 0px 6px; /* key 标签宽度修改*/
   cursor: pointer;
   pointer-events: auto;
-  transition: transform 0.2s ease-out; /* 快速平滑的过渡，避免抖动 */
+  transition: transform 0.2s ease-out; 
   overflow: visible; /* 允许底部线条可见 */
 }
 
