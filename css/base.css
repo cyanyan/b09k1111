@@ -40,4 +40,15 @@ img {
   html, body {
     font-size: 11px;
   }
+  
+  /* 手机端固定背景，避免滚动时背景移动 */
+  html {
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  body {
+    background-attachment: fixed;
+    background-size: cover;
+  }
 }

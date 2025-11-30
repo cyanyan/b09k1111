@@ -73,10 +73,11 @@
     body {
       font-size: 11px;
       padding: 0;
+      background-attachment: fixed;
     }
     .book-list { 
       width: min(560px, 80vw);
-      margin: 10px auto 20px; 
+      margin: 10px auto 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
     }
     .book-list li {
       gap: 12px;
@@ -128,7 +129,7 @@ if (window.top === window.self) {
       .catch(() => {
         const ul = document.getElementById('bookItems');
         const li = document.createElement('li');
-        li.textContent = '无法加载书目列表（assets/booklist.txt）。';
+        li.textContent = 'empty list（assets/booklist.txt）。';
         ul.appendChild(li);
       });
 

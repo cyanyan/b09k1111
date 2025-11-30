@@ -129,11 +129,12 @@
     body {
       font-size: 11px;
       padding: 0;
+      background-attachment: fixed;
     }
 
     .container {
       width: min(560px, 80vw);
-      margin: 10px auto 20px;
+      margin: 10px auto 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
       gap: 15px;
       box-sizing: border-box;
     }

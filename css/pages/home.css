@@ -53,6 +53,14 @@ body.tab-open .image-container {
 }
 
 @media (max-width: 768px) {
+  html, body {
+    background-attachment: fixed;
+  }
+  
+  .home-main {
+    padding-bottom: 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+  }
+  
   .logo {
     top: 18px;
     width: 70px;

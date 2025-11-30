@@ -105,9 +105,13 @@
       overflow-x: hidden;
     }
 
+    body {
+      background-attachment: fixed;
+    }
+    
     .container {
       width: min(560px, 80vw);
-      margin: 10px auto 20px;
+      margin: 10px auto 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
       gap: 15px;
       font-size: 11px;
       box-sizing: border-box;
@@ -156,7 +160,8 @@ if (window.top === window.self) {
 
   <script>
     const imageGrid = document.getElementById('imageGrid');
-
+    
+    // 直接定义数据，立即渲染
     const eventsData = [
       { title: "Event Title 1", date: "18.10–18.11. 2025", image: "assets/events/1.jpg" },
       { title: "Event Title 2", date: "18.10–18.11. 2025", image: "assets/events/2.jpg" },
@@ -164,37 +169,34 @@ if (window.top === window.self) {
       { title: "Event Title 4", date: "18.10–18.11. 2025", image: "assets/events/4.jpg" }
     ];
 
-    function renderEvents() {
-      imageGrid.innerHTML = '';
+    // 立即渲染，不等待任何异步操作
+    eventsData.forEach(({ title, date, image }, index) => {
+      const gridItem = document.createElement('div');
+      gridItem.className = 'grid-item';
 
-      eventsData.forEach(({ title, date, image }, index) => {
-        const gridItem = document.createElement('div');
-        gridItem.className = 'grid-item';
+      const imageLink = document.createElement('a');
+      imageLink.href = '#';
+      imageLink.className = 'image-link';
 
-        const imageLink = document.createElement('a');
-        imageLink.href = '#';
-        imageLink.className = 'image-link';
+      const img = document.createElement('img');
+      img.src = image;
+      img.alt = title || `Event ${index + 1}`;
+      img.loading = 'lazy'; // 懒加载，加快初始显示
 
-        const img = document.createElement('img');
-        img.src = image;
-        img.alt = title || `Event ${index + 1}`;
-        img.loading = 'lazy';
+      const caption = document.createElement('div');
+      caption.className = 'caption';
+      caption.innerHTML = `
+        <span class="title">${title}</span>
+        <span class="date">${date}</span>
+      `;
 
-        const caption = document.createElement('div');
-        caption.className = 'caption';
-        caption.innerHTML = `
-          <span class="title">${title}</span>
-          <span class="date">${date}</span>
-        `;
-
-        imageLink.appendChild(img);
-        gridItem.appendChild(imageLink);
-        gridItem.appendChild(caption);
-        imageGrid.appendChild(gridItem);
-      });
-    }
-
-    renderEvents();
+      imageLink.appendChild(img);
+      gridItem.appendChild(imageLink);
+      gridItem.appendChild(caption);
+      
+      // 立即添加到 DOM，不等待图片加载
+      imageGrid.appendChild(gridItem);
+    });
   </script>
 </body>
 </html>

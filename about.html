@@ -31,7 +31,6 @@
       justify-content: center;
       align-items: flex-start;
       padding-top: 10px;
-      animation: contentSlideInFromRight 0.3s var(--ease) forwards;
     }
 
     /* -------- 文本容器 -------- */
@@ -43,13 +42,16 @@
 
     /* 段落之间保持视觉呼吸 */
     .about-content p {
-      margin: 0 0 16px 0;
+      margin: 0 0 8px 0;
     }
 
     /* -------- 手机端 -------- */
     @media (max-width: 768px) {
+      body {
+        background-attachment: fixed;
+      }
       .about-wrapper {
-        padding: 0px 0 60px 0;
+        padding: 0px 0 100px 0; /* 增加底部间距，避免被浏览器底部标签遮挡 */
         justify-content: center;
       }
       .about-content {
@@ -58,28 +60,27 @@
         line-height: 13px;
       }
     }
+    
+    /* 独立直开时也拥有滑入动画 */
+    body.standalone .about-wrapper {
+      animation: contentSlideInFromRight var(--dur) var(--ease) both;
+    }
   </style>
 </head>
 
 <body>
+<!-- 检测是否独立打开 -->
+<script>
+if (window.top === window.self) {
+  document.body.classList.add('standalone');
+}
+</script>
   <div class="about-wrapper content-slide-in">
-    <div class="about-content" id="aboutText">Loading...</div>
+    <div class="about-content">
+      <p>B09K was founded in 2022 in Changsha, China and is run by Ruidan Zou, Mengyu Sun and Yue Yuan.</p>
+      <p>We focus on contemporary artist publications in Europe, including artist writings, research projects, creative concepts, and theoretical approaches. These books reflect how young artists are thinking about their work today.</p>
+      <p>At the same time, we explore how books interact with readers as platforms for imagined communities. We use exhibitions, events and performances as processes to translate the book. We intend to use these forms of interaction as a way to explore the possibilities of books.</p>
+    </div>
   </div>
-
-  <script>
-    // 从本地 assets/about.txt 读取文本
-    fetch('assets/about.txt')
-      .then(response => response.text())
-      .then(text => {
-        const container = document.getElementById('aboutText');
-        // 按空行分段（如果 about.txt 中有换行）
-        const paragraphs = text.trim().split(/\n\s*\n/);
-        container.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
-      })
-      .catch(err => {
-        console.error('Failed to load about.txt:', err);
-        document.getElementById('aboutText').textContent = 'Failed to load content.';
-      });
-  </script>
 </body>
 </html>

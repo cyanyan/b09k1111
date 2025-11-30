@@ -96,9 +96,13 @@
       padding: 0;
     }
     
+    body {
+      background-attachment: fixed;
+    }
+    
     .container {
       width: min(560px, 80vw);
-      margin: 10px auto 20px;
+      margin: 10px auto 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
       gap: 15px;
       font-size: 11px;
       box-sizing: border-box;
@@ -174,7 +178,8 @@ if (window.top === window.self) {
     function renderImages() {
       imageGrid.innerHTML = '';
       
-      exhibitionsData.forEach((item) => {
+      // 按编号倒序排列（EX_03, EX_02, EX_01）
+      exhibitionsData.slice().reverse().forEach((item) => {
         const gridItem = document.createElement('div');
         gridItem.className = 'grid-item';
         
