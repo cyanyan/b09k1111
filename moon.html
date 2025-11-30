@@ -107,6 +107,7 @@
     display: block;
     position: relative;
     transition: filter 0.6s ease;
+    /* border: 1px solid #9d9d9d; */
   }
   
   .grid-item .image-link:hover img {
@@ -204,18 +205,18 @@ if (window.top === window.self) {
   <script>
     const imageData = {
       2025: [
-        { name: "Maxime Le Bon", date: "18.10-18.11. 2025" },
-        { name: "Marc Buchy", date: "18.10-18.11. 2025" },
-        { name: "Gwendal Coulon", date: "18.10-18.11. 2025" },
-        { name: "Qihang Li", date: "18.10-18.11. 2025" },
-        { name: "June Lihua Yu", date: "18.10-18.11. 2025" },
-        { name: "Martin Poulin", date: "18.10-18.11. 2025" },
-        { name: "Artist 7", date: "18.10-18.11. 2025" },
-        { name: "Artist 8", date: "18.10-18.11. 2025" },
-        { name: "Artist 9", date: "18.10-18.11. 2025" },
-        { name: "Artist 10", date: "18.10-18.11. 2025" },
-        { name: "Artist 11", date: "18.10-18.11. 2025" },
-        { name: "Artist 12", date: "18.10-18.11. 2025" }
+        { name: "Arthur Cordier", date: "18.10-18.11. 2025", pdfName: "LP25_01_Arthur Cordier.pdf" },
+        { name: "Albert Allgaier", date: "18.10-18.11. 2025", pdfName: "LP25_02_Albert Allgaier.pdf" },
+        { name: "Donghwan Kam", date: "18.10-18.11. 2025", pdfName: "LP25_03_Donghwan Kam.pdf" },
+        { name: "lan Whittlesea", date: "18.10-18.11. 2025", pdfName: "LP25_04_lan Whittlesea.pdf" },
+        { name: "Robin Waart", date: "18.10-18.11. 2025", pdfName: "LP25_05_Robin Waart.pdf" },
+        { name: "June Lihua Yu", date: "18.10-18.11. 2025", pdfName: "LP25_06_June Lihua Yu.pdf" },
+        { name: "Andrea Salerno", date: "18.10-18.11. 2025", pdfName: "LP25_07_Andrea Salerno.pdf" },
+        { name: "Andrew Walsh-Lister", date: "18.10-18.11. 2025", pdfName: "LP25_08_Andrew_Walsh-Lister .pdf" },
+        { name: "Matthew Stuart", date: "18.10-18.11. 2025", pdfName: "LP25_09_Matthew_Stuart.pdf" },
+        { name: "manos.manos.manos.", date: "18.10-18.11. 2025", pdfName: "LP25_10_manos.manos.manos..pdf" },
+        { name: "aaabbb.", date: "18.10-18.11. 2025", pdfName: "LP25_11_aaabbb..pdf" },
+        { name: "cccbbb.", date: "18.10-18.11. 2025", pdfName: "LP25_12_cccbbb..pdf" }
       ],
       2024: [
         { name: "Artist 2024-1", date: "18.10-18.11. 2024" },
@@ -259,9 +260,20 @@ if (window.top === window.self) {
         const gridItem = document.createElement('div');
         gridItem.className = 'grid-item';
 
-        const imageNumber = index + 1;
-        const imagePath = `assets/lunar/${year}/${imageNumber}.png`;
-        const pdfPath = `assets/lunar/${year}/${imageNumber}.pdf`;
+        let imagePath, pdfPath;
+        
+        if (year === 2025) {
+          // 2025年使用新命名规则：LP25_01.png 到 LP25_12.png
+          const imageNumber = String(index + 1).padStart(2, '0');
+          imagePath = `assets/lunar/${year}/LP25_${imageNumber}.png`;
+          // PDF 使用 imageData 中定义的 pdfName
+          pdfPath = `assets/lunar/${year}/${item.pdfName || `LP25_${imageNumber}.pdf`}`;
+        } else {
+          // 其他年份保持原有规则
+          const imageNumber = index + 1;
+          imagePath = `assets/lunar/${year}/${imageNumber}.png`;
+          pdfPath = `assets/lunar/${year}/${imageNumber}.pdf`;
+        }
 
         gridItem.innerHTML = `
           <a href="${pdfPath}" class="image-link" target="_blank">
