@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Events</title>
 <link rel="icon" href="assets/b.ico" type="image/x-icon">
-<link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
 <style>
@@ -111,7 +111,7 @@
     
     .container {
       width: min(560px, 80vw);
-      margin: 10px auto 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+      margin: 10px auto 150px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
       gap: 15px;
       font-size: 11px;
       box-sizing: border-box;
@@ -147,7 +147,7 @@
 </head>
 <body>
 
-<!-- 检测是否为独立访问 -->
+
 <script>
 if (window.top === window.self) {
   document.body.classList.add('standalone');
@@ -161,7 +161,7 @@ if (window.top === window.self) {
   <script>
     const imageGrid = document.getElementById('imageGrid');
     
-    // 直接定义数据，立即渲染
+
     const eventsData = [
       { title: "Event Title 1", date: "18.10–18.11. 2025", image: "assets/events/1.jpg" },
       { title: "Event Title 2", date: "18.10–18.11. 2025", image: "assets/events/2.jpg" },
@@ -169,7 +169,7 @@ if (window.top === window.self) {
       { title: "Event Title 4", date: "18.10–18.11. 2025", image: "assets/events/4.jpg" }
     ];
 
-    // 立即渲染，不等待任何异步操作
+   
     eventsData.forEach(({ title, date, image }, index) => {
       const gridItem = document.createElement('div');
       gridItem.className = 'grid-item';
@@ -181,7 +181,7 @@ if (window.top === window.self) {
       const img = document.createElement('img');
       img.src = image;
       img.alt = title || `Event ${index + 1}`;
-      img.loading = 'lazy'; // 懒加载，加快初始显示
+      img.loading = 'lazy'; 
 
       const caption = document.createElement('div');
       caption.className = 'caption';
@@ -194,7 +194,7 @@ if (window.top === window.self) {
       gridItem.appendChild(imageLink);
       gridItem.appendChild(caption);
       
-      // 立即添加到 DOM，不等待图片加载
+
       imageGrid.appendChild(gridItem);
     });
   </script>

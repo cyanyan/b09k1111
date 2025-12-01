@@ -13,24 +13,23 @@
   position: absolute;
   top: 18px;
   width: 80px;
-  z-index: 5000; /* 始终位于页面最上层 */
+  z-index: 5000; 
   cursor: pointer;
-  touch-action: manipulation; /* 防止双击缩放 */
-  -webkit-touch-callout: none; /* 禁用长按菜单 */
+  touch-action: manipulation; 
+  -webkit-touch-callout: none; 
 }
 
 .image-container {
   position: relative;
-  /* width 由 JavaScript 动态设置，确保容器宽度 = 图片宽度 + 40px */
-  max-width: 60vw; /* 桌面端最大宽度限制 */
+
+  max-width: 60vw;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  touch-action: manipulation; /* 防止双击缩放 */
+  touch-action: manipulation; 
 }
 
-/* 展开任意栏目时，首页中间图片隐藏，仅 Logo 常驻 */
 body.tab-open .image-container {
   display: none;
 }
@@ -43,8 +42,8 @@ body.tab-open .image-container {
   height: auto;
   opacity: 0;
   transition: opacity 0.5s ease;
-  touch-action: manipulation; /* 防止双击缩放 */
-  -webkit-touch-callout: none; /* 禁用长按菜单 */
+  touch-action: manipulation; 
+  -webkit-touch-callout: none; 
 }
 
 .image-container img.visible {
@@ -58,7 +57,7 @@ body.tab-open .image-container {
   }
   
   .home-main {
-    padding-bottom: 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+    padding-bottom: 150px; 
   }
   
   .logo {
@@ -67,7 +66,7 @@ body.tab-open .image-container {
   }
 
   .image-container {
-    /* width 由 JavaScript 动态设置，确保容器宽度 = 图片宽度 + 40px */
-    max-width: 60vw; /* 手机端最大宽度限制 */
+
+    max-width: 60vw; 
   }
 }

@@ -102,7 +102,7 @@
     
     .container {
       width: min(560px, 80vw);
-      margin: 10px auto 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+      margin: 10px auto 150px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
       gap: 15px;
       font-size: 11px;
       box-sizing: border-box;
@@ -132,14 +132,13 @@
     }
   }
   
-  /* 独立直开时也拥有滑入动画 */
   body.standalone .container {
     animation: contentSlideInFromRight var(--dur) var(--ease) both;
   }
 </style>
 </head>
 <body>
-<!-- 检测是否独立打开 -->
+
 <script>
 if (window.top === window.self) {
   document.body.classList.add('standalone');
@@ -152,8 +151,7 @@ if (window.top === window.self) {
 
   <script>
     const imageGrid = document.getElementById('imageGrid');
-    
-    // 直接定义图片和 PDF 的映射关系
+     // 直接定义图片和 PDF 的映射关系
     const exhibitionsData = [
       { 
         image: "assets/exhibitions/EX_01_a_libray.png", 
@@ -191,7 +189,7 @@ if (window.top === window.self) {
         const img = document.createElement('img');
         img.src = item.image;
         img.alt = item.title;
-        img.loading = 'lazy'; // 懒加载，加快初始显示
+        img.loading = 'lazy'; 
         
         const caption = document.createElement('div');
         caption.className = 'caption';
@@ -204,12 +202,11 @@ if (window.top === window.self) {
         gridItem.appendChild(imageLink);
         gridItem.appendChild(caption);
         
-        // 立即添加到 DOM，不等待图片加载
+  
         imageGrid.appendChild(gridItem);
       });
     }
     
-    // 立即渲染，不等待任何异步操作
     renderImages();
   </script>
 </body>

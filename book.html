@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book</title>
 <link rel="icon" href="assets/b.ico" type="image/x-icon">
-<link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
 <style>
@@ -64,7 +64,7 @@
     min-width: 0;
   }
 
-  /* 独立访问时滑入动画 */
+
   body.standalone .book-list {
     animation: contentSlideInFromRight var(--dur) var(--ease) both;
   }
@@ -77,7 +77,7 @@
     }
     .book-list { 
       width: min(560px, 80vw);
-      margin: 10px auto 100px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+      margin: 10px auto 150px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
     }
     .book-list li {
       gap: 12px;
@@ -92,7 +92,7 @@
 </head>
 
 <body>
-<!-- ✅ 检测是否独立访问 -->
+
 <script>
 if (window.top === window.self) {
   document.body.classList.add('standalone');
