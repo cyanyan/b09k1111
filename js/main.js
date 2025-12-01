@@ -20,7 +20,7 @@
 })();
 
 // ===============================
-// 标签点击逻辑
+// tab click logic
 // ===============================
 document.querySelectorAll('.tab-labels .label').forEach(label => {
   label.addEventListener('click', (e) => {
@@ -106,7 +106,7 @@ if (logoEl) {
 // ===============================
 (function setupIdleOverlay() {
   let idleTimer = null;
-  const IDLE_TIME = 30000; // 30s
+  const IDLE_TIME = 1200000; // 30s
   let overlay = null;
   let svg = null;
 
