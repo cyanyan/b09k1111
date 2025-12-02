@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: row-reverse;
   z-index: 1000;
+  cursor: default;
 }
 
 .sidebar::before {
@@ -51,9 +52,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: default;
   overflow: hidden;
   transition: width var(--dur) var(--ease);
+  pointer-events: none;
 }
 
 .tab span {
@@ -77,6 +79,7 @@
   z-index: 3000;
   justify-content: flex-start;
   animation: slideFromRightToCenter 0.3s var(--ease);
+  pointer-events: auto;
 }
 
 @keyframes slideFromRightToCenter {
@@ -179,6 +182,7 @@
   width: calc(var(--tab-w) * 5);
   pointer-events: none;
   z-index: 2000;
+  cursor: default;
 }
 
 /* ===== layer ===== */
@@ -199,7 +203,7 @@
   align-items: center;
   justify-content: center;
   padding: 0px 6px;
-  cursor: pointer;
+  cursor: default;
   pointer-events: auto;
   transition: transform 0.2s ease-out; 
   overflow: visible; 
@@ -226,6 +230,8 @@
   line-height: 14px; 
   display: inline-block;
   vertical-align: middle;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .tab-labels .label .short {
@@ -243,6 +249,7 @@
   will-change: max-width;
   text-align: center; 
   pointer-events: none; 
+  cursor: pointer;
 }
 
 .tab-labels .label .full .char {
@@ -260,6 +267,7 @@
 .tab-labels .label.active .full {
   opacity: 1;
   max-width: 200px; 
+  pointer-events: auto;
 }
 
 .tab-labels .label.active .full .char {
