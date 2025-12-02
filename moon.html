@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lunar Practice</title>
 <link rel="icon" href="assets/b.ico" type="image/x-icon">
-<link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
 <style>
@@ -120,7 +120,7 @@
     line-height: 1.4;
   }
 
-  /* 独立访问时也有滑入动画 */
+
   body.standalone .container {
     animation: contentSlideInFromRight var(--dur) var(--ease) both;
   }
@@ -179,7 +179,6 @@
 </head>
 <body>
 
-<!-- 检测是否独立打开 -->
 <script>
 if (window.top === window.self) {
   document.body.classList.add('standalone');
@@ -264,13 +263,13 @@ if (window.top === window.self) {
         let imagePath, pdfPath;
         
         if (year === 2025) {
-          // 2025年使用新命名规则：LP25_01.png 到 LP25_12.png
+          // LP25_01.png - LP25_12.png
           const imageNumber = String(index + 1).padStart(2, '0');
           imagePath = `assets/lunar/${year}/LP25_${imageNumber}.png`;
-          // PDF 使用 imageData 中定义的 pdfName
+          // PDF name
           pdfPath = `assets/lunar/${year}/${item.pdfName || `LP25_${imageNumber}.pdf`}`;
         } else {
-          // 其他年份保持原有规则
+          // other years
           const imageNumber = index + 1;
           imagePath = `assets/lunar/${year}/${imageNumber}.png`;
           pdfPath = `assets/lunar/${year}/${imageNumber}.pdf`;

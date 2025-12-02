@@ -7,7 +7,7 @@
   <link rel="icon" href="assets/b.ico" type="image/x-icon" />
 
   <!-- 继承网站主字体 -->
-  <link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
 
@@ -37,10 +37,9 @@
     .about-content {
       width: 560px;
       text-align: left;
-      white-space: pre-line; /* 读取纯文本时保留换行 */
+      white-space: pre-line; 
     }
 
-    /* 段落之间保持视觉呼吸 */
     .about-content p {
       margin: 0 0 8px 0;
     }
@@ -51,17 +50,16 @@
         background-attachment: fixed;
       }
       .about-wrapper {
-        padding: 0px 0 100px 0; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+        padding: 0px 0 150px 0; /* 增加底部间距，避免被浏览器底部标签遮挡 */
         justify-content: center;
       }
       .about-content {
-        width: 70vw; /* 居中显示，左右各预留15% */
+        width: 70vw; 
         font-size: 11px;
         line-height: 13px;
       }
     }
     
-    /* 独立直开时也拥有滑入动画 */
     body.standalone .about-wrapper {
       animation: contentSlideInFromRight var(--dur) var(--ease) both;
     }
@@ -69,7 +67,7 @@
 </head>
 
 <body>
-<!-- 检测是否独立打开 -->
+
 <script>
 if (window.top === window.self) {
   document.body.classList.add('standalone');

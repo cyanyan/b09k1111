@@ -1,6 +1,8 @@
+/* base.css */
 @font-face {
   font-family: 'AdelpheTrouble';
-  src: url('../assets/Adelphe-Trouble-GerminalRegular.otf') format('opentype');
+  src: url('../assets/Adelphe-Trouble-GerminalRegular.woff2') format('woff2'), /* 优先加载，压缩率更高 */
+       url('../assets/Adelphe-Trouble-GerminalRegular.otf') format('opentype');
   font-display: swap;
 }
 
@@ -41,7 +43,7 @@ img {
     font-size: 11px;
   }
   
-  /* 手机端固定背景，避免滚动时背景移动 */
+
   html {
     background-attachment: fixed;
     background-size: cover;

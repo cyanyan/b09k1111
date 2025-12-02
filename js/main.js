@@ -23,34 +23,38 @@
 // tab click logic
 // ===============================
 document.querySelectorAll('.tab-labels .label').forEach(label => {
-  label.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const id = label.dataset.id;
+  const spans = label.querySelectorAll('span');
+  
+  spans.forEach(span => {
+    span.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = label.dataset.id;
 
-    if (label.classList.contains('active')) return;
-    if (window.openTabById) {
-      window.openTabById(id);
-    } else {
-      switch (id) {
-        case 'lunar_practices':
-          window.location.href = 'moon.html';
-          break;
-        case 'book':
-          window.location.href = 'book.html';
-          break;
-        case 'exhibitions':
-          window.location.href = 'exhibitions.html';
-          break;
-        case 'events':
-          window.location.href = 'events.html';
-          break;
-        case 'about':
-          window.location.href = 'about.html';
-          break;
-        default:
-          console.warn(`No action defined for tab id: ${id}`);
+      if (label.classList.contains('active')) return;
+      if (window.openTabById) {
+        window.openTabById(id);
+      } else {
+        switch (id) {
+          case 'lunar_practices':
+            window.location.href = 'moon.html';
+            break;
+          case 'book':
+            window.location.href = 'book.html';
+            break;
+          case 'exhibitions':
+            window.location.href = 'exhibitions.html';
+            break;
+          case 'events':
+            window.location.href = 'events.html';
+            break;
+          case 'about':
+            window.location.href = 'about.html';
+            break;
+          default:
+            console.warn(`No action defined for tab id: ${id}`);
+        }
       }
-    }
+    });
   });
 });
 
@@ -106,7 +110,7 @@ if (logoEl) {
 // ===============================
 (function setupIdleOverlay() {
   let idleTimer = null;
-  const IDLE_TIME = 1200000; // 30s
+  const IDLE_TIME = 240000; // 4min
   let overlay = null;
   let svg = null;
 
@@ -169,4 +173,16 @@ if (logoEl) {
 
 
   resetIdleTimer();
+})();
+
+
+(function setupStandaloneDetection() {
+
+  if (window.top !== window.self) return;
+  
+  const isHomePage = !!document.getElementById('nav-placeholder');
+
+  if (!isHomePage) {
+    document.body.classList.add('standalone');
+  }
 })();
