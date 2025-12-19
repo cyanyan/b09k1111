@@ -1,5 +1,5 @@
 const container = document.getElementById('imageContainer');
-const totalImages = 10;
+const totalImages = 11;
 let current = 0;
 const maxVisibleImages = 20;
 
@@ -72,7 +72,7 @@ function addNextImage(isInitial = false) {
 function preloadNextImage() {
   const nextIndex = (current % totalImages) + 1;
   const preloadImg = new Image();
-  preloadImg.src = `assets/home/h${nextIndex}.jpg`;
+  preloadImg.src = `assets/home/h${nextIndex}.png`;
 }
 
 function updateContainerWidth() {
