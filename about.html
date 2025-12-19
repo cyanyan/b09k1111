@@ -13,12 +13,21 @@
 
   <style>
     /* -------- 页面结构 -------- */
+    html, body { 
+      overflow-y: auto; 
+      scrollbar-width: none; 
+      margin: 0;
+      padding: 0;
+    }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { 
+      width: 0; 
+      height: 0; 
+    }
     html {
       background: #fff;
       overflow-x: hidden;
     }
     body {
-      margin: 0;
       background: #fff;
       color: #000;
       font-family: 'AdelpheTrouble', var(--font);
@@ -60,6 +69,8 @@
     /* -------- 手机端 -------- */
     @media (max-width: 768px) {
       body {
+        font-size: 12px;
+        padding: 0;
         background-attachment: fixed;
       }
       .about-wrapper {
