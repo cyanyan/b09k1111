@@ -57,6 +57,9 @@ body.tab-open .image-container {
   }
   
   .home-main {
+    width: min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px));
+    margin-left: calc((100vw - var(--sidebar-width-mobile) - min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px))) / 1.8);
+    margin-right: auto;
     padding-bottom: 150px; 
   }
   
@@ -66,7 +69,6 @@ body.tab-open .image-container {
   }
 
   .image-container {
-
-    max-width: 60vw; 
+    max-width: min(560px, calc(100vw - var(--sidebar-width-mobile) - 20px));
   }
 }

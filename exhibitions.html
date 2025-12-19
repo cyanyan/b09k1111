@@ -19,11 +19,16 @@
     width: 0; 
     height: 0; 
   }
+  html {
+    background: #ffffff;
+    overflow-x: hidden;
+  }
   body {
     background: #ffffff;
     color: #000;
     font-family: 'AdelpheTrouble', var(--font);
     padding: 0;
+    overflow-x: hidden;
   }
 
   .container {
@@ -102,8 +107,11 @@
     }
     
     .container {
-      width: min(560px, 80vw);
-      margin: 10px auto 150px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+      width: min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px));
+      margin-left: calc((100vw - var(--sidebar-width-mobile) - min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px))) / 1.8);
+      margin-right: auto;
+      margin-top: 10px;
+      margin-bottom: 150px;
       gap: 15px;
       font-size: 11px;
       box-sizing: border-box;
@@ -129,7 +137,7 @@
       height: 100%;
     }
     .grid-item .caption {
-      font-size: 11px;
+      font-size: 12px;
     }
   }
   

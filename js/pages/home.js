@@ -28,7 +28,7 @@ function addNextImage(isInitial = false) {
   
   current = (current % totalImages) + 1;
   const img = document.createElement('img');
-  img.src = `assets/home/h${current}.jpg`;
+  img.src = `assets/home/h${current}.png`;
   if (!isInitial) {
     img.loading = 'lazy';
   }

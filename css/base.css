@@ -18,7 +18,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: #000000;
+  background: #ffffff;
   font-family: var(--font);
   font-size: 13.3px; 
   box-sizing: border-box;
@@ -39,7 +39,7 @@ img {
 
 @media (max-width: 768px) {
   html, body {
-    font-size: 11px;
+    font-size: 12px;
   }
   
 

@@ -19,11 +19,16 @@
     width: 0; 
     height: 0; 
   }
+  html {
+    background: #ffffff;
+    overflow-x: hidden;
+  }
   body {
     background: #ffffff;
     color: #000;
     font-family: 'AdelpheTrouble', var(--font);
     padding: 0;
+    overflow-x: hidden;
   }
 
   .container {
@@ -110,8 +115,11 @@
     }
     
     .container {
-      width: min(560px, 80vw);
-      margin: 10px auto 150px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+      width: min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px));
+      margin-left: calc((100vw - var(--sidebar-width-mobile) - min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px))) / 1.8);
+      margin-right: auto;
+      margin-top: 10px;
+      margin-bottom: 150px;
       gap: 15px;
       font-size: 11px;
       box-sizing: border-box;
@@ -140,7 +148,7 @@
     }
 
     .grid-item .caption {
-      font-size: 11px;
+      font-size: 12px;
     }
   }
 </style>
@@ -163,20 +171,24 @@ if (window.top === window.self) {
     
 
     const eventsData = [
-      { title: "Event Title 1", date: "18.10–18.11. 2025", image: "assets/events/1.jpg" },
-      { title: "Event Title 2", date: "18.10–18.11. 2025", image: "assets/events/2.jpg" },
-      { title: "Event Title 3", date: "18.10–18.11. 2025", image: "assets/events/3.jpg" },
-      { title: "Event Title 4", date: "18.10–18.11. 2025", image: "assets/events/4.jpg" }
+      { title: "Event Title 1", date: "18.10–18.11. 2025", image: "assets/events/1.jpg", pdf: "assets/events/E_A library.pdf" },
+      { title: "Event Title 2", date: "18.10–18.11. 2025", image: "assets/events/2.jpg", pdf: "assets/events/E_the books.pdf" },
+      { title: "Event Title 3", date: "18.10–18.11. 2025", image: "assets/events/3.jpg", pdf: "assets/events/E_the bootleg.pdf" },
+      { title: "Event Title 4", date: "18.10–18.11. 2025", image: "assets/events/4.jpg", pdf: "assets/events/EX_00004.pdf" },
+      { title: "Event Title 5", date: "18.10–18.11. 2025", image: "assets/events/5.jpg", pdf: "assets/events/EX_000045.pdf" }
     ];
 
    
-    eventsData.forEach(({ title, date, image }, index) => {
+    eventsData.forEach(({ title, date, image, pdf }, index) => {
       const gridItem = document.createElement('div');
       gridItem.className = 'grid-item';
 
+      const pdfPath = pdf || `assets/events/E_${String(index + 1).padStart(2, '0')}.pdf`;
+
       const imageLink = document.createElement('a');
-      imageLink.href = '#';
+      imageLink.href = pdfPath;
       imageLink.className = 'image-link';
+      imageLink.target = '_blank';
 
       const img = document.createElement('img');
       img.src = image;

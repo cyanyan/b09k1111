@@ -13,13 +13,17 @@
 
   <style>
     /* -------- 页面结构 -------- */
+    html {
+      background: #fff;
+      overflow-x: hidden;
+    }
     body {
       margin: 0;
       background: #fff;
       color: #000;
       font-family: 'AdelpheTrouble', var(--font);
       font-size: 13.3px;
-      line-height: 16px;
+      line-height: 19px;
       -webkit-text-size-adjust: 100%;
       overflow-x: hidden;
     }
@@ -41,7 +45,16 @@
     }
 
     .about-content p {
-      margin: 0 0 8px 0;
+      margin: 0 0 16px 0;
+    }
+
+    .about-content a {
+      color: #000;
+      text-decoration: underline;
+    }
+
+    .about-content a:hover {
+      opacity: 0.7;
     }
 
     /* -------- 手机端 -------- */
@@ -50,13 +63,15 @@
         background-attachment: fixed;
       }
       .about-wrapper {
-        padding: 0px 0 150px 0; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+        padding: 0px 0 150px 0; 
         justify-content: center;
       }
       .about-content {
-        width: 70vw; 
-        font-size: 11px;
-        line-height: 13px;
+        width: min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px));
+        margin-left: calc((100vw - var(--sidebar-width-mobile) - min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px))) / 1.8);
+        margin-right: auto;
+        font-size: 12px;
+        line-height: 17px;
       }
     }
     
@@ -74,11 +89,53 @@ if (window.top === window.self) {
 }
 </script>
   <div class="about-wrapper content-slide-in">
-    <div class="about-content">
-      <p>B09K was founded in 2022 in Changsha, China and is run by Ruidan Zou, Mengyu Sun and Yue Yuan.</p>
-      <p>We focus on contemporary artist publications in Europe, including artist writings, research projects, creative concepts, and theoretical approaches. These books reflect how young artists are thinking about their work today.</p>
-      <p>At the same time, we explore how books interact with readers as platforms for imagined communities. We use exhibitions, events and performances as processes to translate the book. We intend to use these forms of interaction as a way to explore the possibilities of books.</p>
-    </div>
+    <div class="about-content" id="aboutContent"></div>
   </div>
+
+  <script>
+    function convertEmailToLink(text) {
+      const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g;
+      return text.replace(emailRegex, '<a href="mailto:$1">$1</a>');
+    }
+
+    fetch('assets/about.txt')
+      .then(r => r.text())
+      .then(txt => {
+        const lines = txt.split(/\r?\n/);
+        const container = document.getElementById('aboutContent');
+        let currentParagraph = [];
+        
+        lines.forEach((line, index) => {
+          if (line.trim() === '') {
+            if (currentParagraph.length > 0) {
+              const p = document.createElement('p');
+              const paragraphText = currentParagraph.join('\n');
+              p.innerHTML = convertEmailToLink(paragraphText);
+              container.appendChild(p);
+              currentParagraph = [];
+            }
+    
+            const emptyP = document.createElement('p');
+            emptyP.textContent = '';
+            container.appendChild(emptyP);
+          } else {
+            currentParagraph.push(line);
+          }
+        });
+        
+        if (currentParagraph.length > 0) {
+          const p = document.createElement('p');
+          const paragraphText = currentParagraph.join('\n');
+          p.innerHTML = convertEmailToLink(paragraphText);
+          container.appendChild(p);
+        }
+      })
+      .catch(() => {
+        const container = document.getElementById('aboutContent');
+        const p = document.createElement('p');
+        p.textContent = 'Failed to load content.';
+        container.appendChild(p);
+      });
+  </script>
 </body>
 </html>

@@ -1,3 +1,16 @@
+/* ===== right black layer ===== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100vh;
+  background: #000;
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* ===== nav===== */
 .sidebar {
   position: fixed;
@@ -14,7 +27,7 @@
   content: "";
   position: fixed;
   top: 0;
-  right: 30;
+  right: 30px;
   width: calc(var(--tab-w) * 3);
   height: 100vh;
   background: #fff;
@@ -24,18 +37,22 @@
 
 .sidebar::after {
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 0;
+  right: var(--gap);
   width: calc(var(--tab-w) * 5);
-  height: 100%;
-  background-image: repeating-linear-gradient(
-    to left,
-    var(--color) 0,
-    var(--color) var(--line),
-    transparent var(--line),
-    transparent var(--tab-w)
-  );
+  height: 100vh;
+  background:
+    repeating-linear-gradient(
+      to left,
+      var(--color) 0,
+      var(--color) var(--line),
+      transparent var(--line),
+      transparent var(--tab-w)
+    ),
+    #fff;
+  background-size: calc(var(--tab-w) * 5) 100%, 100% 100%;
+  background-position: right 0 top 0, right 0 top 0;
   z-index: 1500;
   pointer-events: none;
 }
@@ -80,6 +97,7 @@
   justify-content: flex-start;
   animation: slideFromRightToCenter 0.3s var(--ease);
   pointer-events: auto;
+  background: #fff;
 }
 
 @keyframes slideFromRightToCenter {
@@ -128,18 +146,31 @@
     width: calc(100vw - (var(--gap) * 2));
     padding: 90px var(--gap) var(--gap);
     height: 100vh;
+    background: #fff;
   }
   
 
+  .sidebar::before {
+    width: var(--sidebar-width-mobile);
+    right: var(--gap);
+  }
+
   .sidebar::after {
-    width: var(--sidebar-width-mobile); 
-    background-image: repeating-linear-gradient(
-      to left,
-      var(--color) 0,
-      var(--color) var(--line-mobile),
-      transparent var(--line-mobile),
-      transparent var(--tab-w-mobile)
-    );
+    width: var(--sidebar-width-mobile);
+    right: var(--gap);
+    height: 100vh;
+    background:
+      repeating-linear-gradient(
+        to left,
+        var(--color) 0,
+        var(--color) var(--line-mobile),
+        transparent var(--line-mobile),
+        transparent var(--tab-w-mobile)
+      ),
+      #fff;
+    background-size: var(--sidebar-width-mobile) 100%, 100% 100%;
+    background-position: 0 0, 0 0;
+    background-repeat: no-repeat;
   }
   
   .tab {

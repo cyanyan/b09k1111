@@ -19,12 +19,17 @@
     width: 0; 
     height: 0; 
   }
+  html {
+    background: #ffffff;
+    overflow-x: hidden;
+  }
   body {
     background: #ffffff;
     color: #000;
-    font-family: var(--font);
+    font-family: 'AdelpheTrouble', var(--font);
     font-size: 13.3px;
     padding: 0;
+    overflow-x: hidden;
   }
   
   .container {
@@ -127,14 +132,17 @@
 
   @media (max-width: 768px) {
     body {
-      font-size: 11px;
+      font-size: 12px;
       padding: 0;
       background-attachment: fixed;
     }
 
     .container {
-      width: min(560px, 80vw);
-      margin: 10px auto 150px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+      width: min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px));
+      margin-left: calc((100vw - var(--sidebar-width-mobile) - min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px))) / 1.8);
+      margin-right: auto;
+      margin-top: 10px;
+      margin-bottom: 150px;
       gap: 15px;
       box-sizing: border-box;
     }
@@ -191,6 +199,7 @@
       <div class="year-item active" data-year="2025">2025</div>
       <div class="year-item" data-year="2024">2024</div>
       <div class="year-item" data-year="2023">2023</div>
+      <div class="year-item" data-year="2022">2022</div>
     </div>
 
     <div class="image-grid" id="imageGrid"></div>
@@ -213,32 +222,36 @@
         { name: "cccbbb.", date: "18.10-18.11. 2025", pdfName: "LP25_12_cccbbb..pdf" }
       ],
       2024: [
-        { name: "Artist 2024-1", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-2", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-3", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-4", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-5", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-6", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-7", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-8", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-9", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-10", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-11", date: "18.10-18.11. 2024" },
-        { name: "Artist 2024-12", date: "18.10-18.11. 2024" }
+      { name: "Marc buchy", date: "18.10-18.11. 2024", pdfName: "LP24_01_Marc buchy.pdf" },
+        { name: "Louise Siffert", date: "18.10-18.11. 2024"},
+        { name: "Maud Gourdon", date: "18.10-18.11. 2024"},
+        { name: "qihang Li", date: "18.10-18.11. 2024"},
+        { name: "Olivier Bémer", date: "18.10-18.11. 2024" },
+        { name: "Maxime  fauconnie", date: "18.10-18.11. 2024" },
+        { name: "Reinier Vrancken & Bernke Klein Zandvoort", date: "18.10-18.11. 2024"},
+        { name: "Martin Poulain", date: "18.10-18.11. 2024" },
+        { name: "Camila Oliveira Fairclough", date: "18.10-18.11. 2024"},
+        { name: "Hamed Deqhan", date: "18.10-18.11. 2024" },
+        { name: "FengFeng", date: "18.10-18.11. 2024" }
       ],
       2023: [
-        { name: "Artist 2023-1", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-2", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-3", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-4", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-5", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-6", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-7", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-8", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-9", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-10", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-11", date: "18.10-18.11. 2023" },
-        { name: "Artist 2023-12", date: "18.10-18.11. 2023" }
+        { name: "Sophie Nys", date: "18.10-18.11. 2023" },
+        { name: "Marianne Mispelaëre", date: "18.10-18.11. 2023" },
+        { name: "Yuki Okumura", date: "18.10-18.11. 2023" },
+        { name: "Gwendal Coulon", date: "18.10-18.11. 2023" },
+        { name: "Mirat-Masson", date: "18.10-18.11. 2023" },
+        { name: "Elsa Werth", date: "18.10-18.11. 2023" },
+        { name: "Henry Andersen", date: "18.10-18.11. 2023" },
+        { name: "Valérian Goalec", date: "18.10-18.11. 2023" },
+        { name: "Maxime Le Bon", date: "18.10-18.11. 2023" },
+        { name: "Marjolein Guldentops", date: "18.10-18.11. 2023" },
+        { name: "Lucas Leglise", date: "18.10-18.11. 2023" },
+        { name: "Niels Poiz", date: "18.10-18.11. 2023" }
+      ],
+      2022: [
+        { name: "Wim de Pauw", date: "18.10-18.11. 2022" },
+        { name: "Maria Paris", date: "18.10-18.11. 2022" },
+        { name: "Claudia de la Torre", date: "18.10-18.11. 2022" }
       ]
     };
 
@@ -256,17 +269,16 @@
 
         let imagePath, pdfPath;
         
-        if (year === 2025) {
-          // LP25_01.png - LP25_12.png
-          const imageNumber = String(index + 1).padStart(2, '0');
-          imagePath = `assets/lunar/${year}/LP25_${imageNumber}.png`;
-          // PDF name
-          pdfPath = `assets/lunar/${year}/${item.pdfName || `LP25_${imageNumber}.pdf`}`;
+        // 统一使用 LP{年份后两位}_{编号}.png 格式
+        const yearSuffix = String(year).slice(-2);
+        const imageNumber = String(index + 1).padStart(2, '0');
+        imagePath = `assets/lunar/${year}/LP${yearSuffix}_${imageNumber}.png`;
+        
+        // PDF 路径：如果有 pdfName 使用 pdfName，否则使用 LP{年份后两位}_{编号}.pdf
+        if (item.pdfName) {
+          pdfPath = `assets/lunar/${year}/${item.pdfName}`;
         } else {
-          // other years
-          const imageNumber = index + 1;
-          imagePath = `assets/lunar/${year}/${imageNumber}.png`;
-          pdfPath = `assets/lunar/${year}/${imageNumber}.pdf`;
+          pdfPath = `assets/lunar/${year}/LP${yearSuffix}_${imageNumber}.pdf`;
         }
 
         gridItem.innerHTML = `

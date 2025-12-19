@@ -11,11 +11,16 @@
 <style>
   html, body { overflow-y: auto; scrollbar-width: none; margin:0; padding:0; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
+  html {
+    background: #ffffff;
+    overflow-x: hidden;
+  }
   body { 
     background:#ffffff; 
     color:#000; 
-    font-family: var(--font);
+    font-family: 'AdelpheTrouble', var(--font);
     font-size: 13.3px;
+    overflow-x: hidden;
   }
 
   .book-list { 
@@ -30,10 +35,10 @@
     margin:0; 
   }
 
-  .book-list li { 
+  .book-list li {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* ✅ 对齐最后一行 */
+    align-items: flex-start; /* 书名靠顶部对齐 */
     gap: 24px;
     padding:6px 0; 
     border-bottom: var(--line) solid var(--color); 
@@ -53,15 +58,16 @@
   }
 
   .book-title {
-    flex: 1 1 55%;
+    flex: 1 1 50%;
     min-width: 0;
     text-align: left;
   }
 
   .book-author {
-    flex: 0 1 40%;
+    flex: 0 1 50%;
     text-align: right;
     min-width: 0;
+    align-self: flex-end; /* 作者名保持底部对齐 */
   }
 
 
@@ -76,15 +82,18 @@
       background-attachment: fixed;
     }
     .book-list { 
-      width: min(560px, 80vw);
-      margin: 10px auto 150px; /* 增加底部间距，避免被浏览器底部标签遮挡 */
+      width: min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px));
+      margin-left: calc((100vw - var(--sidebar-width-mobile) - min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px))) / 1.8);
+      margin-right: auto;
+      margin-top: 0px;
+      margin-bottom: 150px;
     }
     .book-list li {
       gap: 12px;
       padding: 3px 0;
     }
     .book-author {
-      flex: 0 1 45%;
+      flex: 0 1 50%;
       text-align: right;
     }
   }
