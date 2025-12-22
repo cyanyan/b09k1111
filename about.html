@@ -6,13 +6,11 @@
   <title>About</title>
   <link rel="icon" href="assets/b.ico" type="image/x-icon" />
 
-  <!-- 继承网站主字体 -->
   <link rel="preload" href="assets/Adelphe-Trouble-GerminalRegular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
 
   <style>
-    /* -------- 页面结构 -------- */
     html, body { 
       overflow-y: auto; 
       scrollbar-width: none; 
@@ -29,6 +27,7 @@
     }
     body {
       background: #fff;
+      background-attachment: fixed;
       color: #000;
       font-family: 'AdelpheTrouble', var(--font);
       font-size: 13.3px;
@@ -39,18 +38,15 @@
 
     .about-wrapper {
       width: 100%;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 10px;
     }
 
-    /* -------- 文本容器 -------- */
     .about-content {
       width: 560px;
+      max-width: 90vw;
+      margin: 18px auto 60px;
       text-align: left;
       white-space: pre-line; 
+      box-sizing: border-box;
     }
 
     .about-content p {
@@ -66,19 +62,16 @@
       opacity: 0.7;
     }
 
-    /* -------- 手机端 -------- */
     @media (max-width: 768px) {
       body {
         font-size: 12px;
         padding: 0;
         background-attachment: fixed;
       }
-      .about-wrapper {
-        padding: 0px 0 150px 0; 
-        justify-content: center;
-      }
       .about-content {
         width: min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px));
+        margin-top: 0;
+        margin-bottom: 150px;
         margin-left: calc((100vw - var(--sidebar-width-mobile) - min(460px, calc(100vw - var(--sidebar-width-mobile) - 40px))) / 1.8);
         margin-right: auto;
         font-size: 12px;
