@@ -180,10 +180,11 @@ if (window.top === window.self) {
       const gridItem = document.createElement('div');
       gridItem.className = 'grid-item';
 
-      const pdfPath = pdf || `assets/events/E_${String(index + 1).padStart(2, '0')}.pdf`;
+      // 如果有 pdf 字段，打开 PDF；否则打开"档案搭建中"提示页面
+      const linkPath = pdf ? pdf : 'archive-building.html';
 
       const imageLink = document.createElement('a');
-      imageLink.href = pdfPath;
+      imageLink.href = linkPath;
       imageLink.className = 'image-link';
       imageLink.target = '_blank';
 

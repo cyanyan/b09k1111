@@ -5,8 +5,8 @@ fetch('partials/nav.html')
 
     const tabs = document.querySelectorAll('.tab');
     const idConfig = {
-      book: { page: 'book.html', title: 'Book' },
-      lunar_practices: { page: 'moon.html', title: 'Lunar Practice' },
+      book: { page: 'book.html', title: 'Books' },
+      lunar_practices: { page: 'moon.html', title: 'Lunar Practices' },
       exhibitions: { page: 'exhibitions.html', title: 'Exhibitions' },
       events: { page: 'events.html', title: 'Events' },
       about: { page: 'about.html', title: 'About' }
