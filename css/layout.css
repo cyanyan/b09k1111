@@ -9,7 +9,16 @@ body::before {
   background: #000;
   z-index: 1;
   pointer-events: none;
+
+   /* animation */
+   transform: translateX(0);
+   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* right edge nudge */
+body.edge-nudge::before {
+  transform: translateX(10px);
+}
+
 
 /* ===== nav===== */
 .sidebar {
@@ -59,6 +68,7 @@ body::before {
 
 
 
+
 .tab {
   position: relative;
   width: var(--tab-w);
@@ -87,7 +97,7 @@ body::before {
   top: 0;
   left: 50%;              
   transform: translateX(-50%);
-  width: calc(100vw - (var(--gap) * 2));
+  width: calc(100% - (var(--gap) * 2));
   height: 100vh;
   padding: 120px var(--gap) var(--gap);
   box-sizing: border-box;

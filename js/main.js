@@ -27,6 +27,16 @@ document.querySelectorAll('.tab-labels .label').forEach(label => {
     e.stopPropagation();
     const id = label.dataset.id;
 
+    // trigger right edge animation
+document.body.classList.remove('edge-nudge');
+void document.body.offsetWidth; // force reflow
+document.body.classList.add('edge-nudge');
+
+setTimeout(() => {
+  document.body.classList.remove('edge-nudge');
+}, 260);
+
+
     if (label.classList.contains('active')) return;
     if (window.openTabById) {
       window.openTabById(id);
