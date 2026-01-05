@@ -28,7 +28,7 @@ function addNextImage(isInitial = false) {
   
   current = (current % totalImages) + 1;
   const img = document.createElement('img');
-  img.src = `assets/home/h${current}.png`;
+  img.src = `assets/home/h${current}.webp`;
   if (!isInitial) {
     img.loading = 'lazy';
   }
@@ -72,7 +72,7 @@ function addNextImage(isInitial = false) {
 function preloadNextImage() {
   const nextIndex = (current % totalImages) + 1;
   const preloadImg = new Image();
-  preloadImg.src = `assets/home/h${nextIndex}.png`;
+  preloadImg.src = `assets/home/h${nextIndex}.webp`;
 }
 
 function updateContainerWidth() {
