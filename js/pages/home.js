@@ -38,6 +38,7 @@ function addNextImage(isInitial = false) {
   
   img.onload = function() {
     const aspectRatio = img.naturalWidth / img.naturalHeight;
+    
     let maxWidth;
     
     if (isMobile) {
@@ -51,7 +52,7 @@ function addNextImage(isInitial = false) {
       }
     }
     
-    const minWidth = isMobile ? Math.floor(maxWidth * 0.6) : Math.floor(maxWidth * 0.7);
+    const minWidth = isMobile ? Math.floor(maxWidth * 0.7) : Math.floor(maxWidth * 0.8);
     const randomWidth = Math.floor(minWidth + Math.random() * (maxWidth - minWidth));
     img.style.width = randomWidth + 'px';
     

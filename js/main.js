@@ -27,9 +27,9 @@ document.querySelectorAll('.tab-labels .label').forEach(label => {
     e.stopPropagation();
     const id = label.dataset.id;
 
-    // trigger right edge animation
+
 document.body.classList.remove('edge-nudge');
-void document.body.offsetWidth; // force reflow
+void document.body.offsetWidth; 
 document.body.classList.add('edge-nudge');
 
 setTimeout(() => {
@@ -116,7 +116,7 @@ if (logoEl) {
 // ===============================
 (function setupIdleOverlay() {
   let idleTimer = null;
-  const IDLE_TIME = 1200000; // 30s
+  const IDLE_TIME = 300000; // 5 minutes
   let overlay = null;
   let svg = null;
 
